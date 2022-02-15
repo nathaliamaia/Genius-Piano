@@ -1,6 +1,7 @@
-const BLACK_KEYS = [];
-const WHITE_KEYS = [];
+// const BLACK_KEYS = [];
+// const WHITE_KEYS = [];
 
+// Classes
 const keys = document.querySelectorAll(".key");
  
 keys.forEach(key => {
