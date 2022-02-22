@@ -83,3 +83,6 @@ display: flex;
 .buttons{
   display: flex;
 }
+.unclickable {
+  pointer-events: none;
+}
