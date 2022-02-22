@@ -1,61 +1,85 @@
 /* piano stlye */
 
-*::before, *::after {
-    box-sizing:border-box;
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 body {
-    background-color:lightgray;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: lightgray;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
 }
-.piano{
-    display: flex;
+.piano {
+  display: flex;
 }
-.key{
- height: calc(var(--width) * 4);
- width: var(--width);
+.key {
+  height: calc(var(--width) * 4);
+  width: var(--width);
 }
-.white{
- --width: 50px;
- /* height: 200px; */
- background-color: white;
- border: 0.5px solid black;
- border-radius: 0 0 .3rem .3rem;
- box-shadow: 0px 7px 1px rgba(87, 85, 85, 0.3);
- transition: background-color 0.05s ease, box-shadow 0.05s ease;
+.white {
+  --width: 50px;
+  /* height: 200px; */
+  background-color: white;
+  border: 0.5px solid black;
+  border-radius: 0 0 0.3rem 0.3rem;
+  box-shadow: 0px 7px 1px rgba(87, 85, 85, 0.3);
+  /* transition: background-color 0.05s ease, box-shadow 0.05s ease; */
 }
 .white.active {
- background-color: #CCC;
- /* background: #D8D8D8; */
+  background-color: rgb(255, 255, 255);
+  background: #D8D8D8; 
+}
+.white.click {
   position: relative;
-  top: 5px;
   box-shadow: 0px 0px 0px rgba(32, 32, 32, 0);
+  top: 5px; 
   transition: background-color 0.05s ease, box-shadow 0.05s ease;
 }
-.black{
- --width: 30px;
- /* height: 120px; */
- background-color: black;
- /* border: 0.1px solid black; */
- border-radius: 0 0 .3rem .3rem;;
- margin-left: -15px;
- margin-right: -15px;
- z-index: 2;
- box-shadow: 0px 7px 1px rgba(87, 85, 85, 0.3);
- transition: background-color 0.05s ease, box-shadow 0.05s ease;
-
+.black {
+  --width: 30px;
+  /* height: 120px; */
+  background-color: black;
+  /* border: 0.1px solid black; */
+  border-radius: 0 0 0.3rem 0.3rem;
+  margin-left: -15px;
+  margin-right: -15px;
+  z-index: 2;
+  box-shadow: 0px 7px 1px rgba(87, 85, 85, 0.3);
+  /* transition: background-color 0.05s ease, box-shadow 0.05s ease; */
 }
 .black.active {
-    /* background-color: darkgray; */
- background: rgb(92, 92, 92);
+  /* background-color: darkgray; */
+  background: rgb(92, 92, 92);
+}
+.black.click {
   position: relative;
+  box-shadow: 0px 0px 0px rgba(32, 32, 32, 0);  
   top: 5px;
-  box-shadow: 0px 0px 0px rgba(32, 32, 32, 0);
   transition: background-color 0.05s ease, box-shadow 0.05s ease;
 }
-.start-btn{
- display: flex;
+/* #btnStart {
+  display: flex;
+} */
+#counter {
+  height: 30px;
+  width: 60px;
+}
+.button {
+width: 70px;
+height: 35px;
+position: relative;
+display: flex;
+
+}
+#counter {
+  height: 30px;
+  background-color: rgb(255, 231, 137);
+  text-align: center;
+}
+.buttons{
+  display: flex;
 }

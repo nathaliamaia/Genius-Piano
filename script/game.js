@@ -6,5 +6,12 @@
 //5. Comparar o valor da array da escolha do player com a array da tecla sorteada.
 // 6. Se o player acertar a sequencia, o loop recomeça com uma tecla a mais.
 // 7. Se o player errar a tecla, aparece uma mensagem "você perdeu".
-// 
+//SCORE: cada clique correto 1 ponto é adicionado ao score. 
 
+
+
+//condicoes de passagem de nivel
+
+
+
+//restart
