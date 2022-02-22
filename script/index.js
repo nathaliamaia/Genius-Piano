@@ -5,16 +5,22 @@ const keys = document.querySelectorAll(".key");
 const playerScore = document.getElementById("counter");
 const powerBtn = document.getElementById("powerButton");
 
+
 let cpuSequence = [];
 let playerSequence = [];
 
-let count = 0;
+let count = 1;
 let level = 0;
+
+
 
 keys.forEach((key) => {
   key.addEventListener("click", () => playNote(key));
   key.addEventListener("click", () => key.classList.add("click"));
-  key.addEventListener("click", () => handleChoise(key));
+  key.addEventListener("click", () => { 
+    if(mode === "Game")
+      handleChoise(key) 
+  }); 
   key.addEventListener("mouseout", () => key.classList.remove("click"));
 });
 
@@ -45,7 +51,7 @@ function pickRandomKey() {
 
 function nextRound() {
   level += 1;
-  const nextSequence = [...cpuSequence];
+  const nextSequence = [...cpuSequence]; 
   nextSequence.push(pickRandomKey());
   cpuSequence = nextSequence;
   playRound(nextSequence);
@@ -59,6 +65,8 @@ function playGame() {
 
 //botao de start
 startBtn.addEventListener("click", () => {
+  mode = "Game";
+  playerScore.innerHTML = "0";
   playGame();
 });
 
@@ -67,23 +75,24 @@ powerBtn.addEventListener("click", (event) => {
   playerScore.innerHTML = "--";
 });
 
-//mudar intervalo dos efeitos (active)
-
-//obs.: config. para que quando a tecla seja selecionada apenas mude de cor e ressoe o toque. OK
-
 // escolha do jogador
 function handleChoise(key) {
   const index = playerSequence.push(key) - 1;
   
-  // Checa sequência
+  // Checa sequência 
   if(playerSequence[index] !== cpuSequence[index]) {
-    // resetGame(); TO-DO
     alert("Você perdeu");
+    resetGame();
     return;
+  } else if (playerSequence[index] == cpuSequence[index]) {
+    // playerScore.innerHTML = count;
+    updatePlayerScore();
+    // count++; //rever
   }
 
   if(playerSequence.length === cpuSequence.length) {
     playerSequence = [];
+    
     // alert("Você acertou!");
     setTimeout(() => {
       nextRound();
@@ -92,8 +101,26 @@ function handleChoise(key) {
     return;
   }
 }
+function updatePlayerScore() {
+  playerScore.innerHTML = count;
+  count++;
+}
+function resetGame(){
+  cpuSequence = [];
+  playerSequence = [];
+  level = 0;
+  count = 0;
+}
 
-//score
-// function updatePlayerScore(){}
 
-// condições
+// TO DO:
+
+//1.score OK
+// 
+//2. permitir o  modo livre ("brincar"com o piano livremente)-> se tiver nesse modo, não entra no handlechoise  OK
+//3. se der tempo, adicionar opcao de usar teclas para brincar com o piano.
+//4. restart.
+//5. depois que errar, só pode apertar no restart
+//6. Não poder clicar no start enquanto tiver na partida
+//7. rever tempo de efeito do "active"
+//8. Só deixar clicar depois que a cpu gera uma nova key na sequencia.
