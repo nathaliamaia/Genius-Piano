@@ -5,9 +5,12 @@ const keys = document.querySelectorAll(".key");
 const playerScore = document.getElementById("counter");
 const powerBtn = document.getElementById("powerButton");
 
+
+
+
 let cpuSequence = [];
 let playerSequence = [];
-
+let mode = "free";
 let count = 1;
 let power = "off";
 
@@ -32,6 +35,7 @@ function playNote(key) {
   });
 }
 
+// ajusta o tempo de cada key 
 function playRound(nextSequence) {
   nextSequence.forEach((key, index) => {
     setTimeout(() => {
@@ -46,6 +50,7 @@ function pickRandomKey() {
   return keys[randomNum];
 }
 
+//adiciona um novo valor no final da sequência 
 function nextRound() {
   const nextSequence = [...cpuSequence];
   nextSequence.push(pickRandomKey());
@@ -70,14 +75,21 @@ function playGame() {
 //botão para "ligar"o jogo.
 powerBtn.addEventListener("click", (event) => {
   playerScore.innerHTML = "--";
-  if ((power = "on")) {
+  if (power = "on") {
     startBtn.addEventListener("click", () => {
       mode = "Game";
       playerScore.innerHTML = "0";
       playGame();
     });
   }
-  
+  if(power = "off") {
+    mode = "free";
+  }
+});
+
+powerBtn.addEventListener("dblclick", (event) => {
+  power = "off";
+   playerScore.innerHTML = "";
 });
 
 // escolha do jogador
@@ -104,6 +116,7 @@ function handleChoise(key) {
     return;
   }
 }
+
 function updatePlayerScore() {
   playerScore.innerHTML = count;
   count++;
@@ -112,11 +125,14 @@ function updatePlayerScore() {
 function resetGame() {
   cpuSequence = [];
   playerSequence = [];
-  count = 0;
+  count = 1;
   playerScore.innerHTML = "--";
 }
+
 restartBtn.addEventListener("click", () => {
   resetGame();
+  playGame();
+  playerScore.innerHTML = "0";                
 });
 
 // TO DO:
