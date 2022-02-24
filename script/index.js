@@ -4,8 +4,8 @@ const restartBtn = document.getElementById("btnRestart");
 const keys = document.querySelectorAll(".key");
 const playerScore = document.getElementById("counter");
 const powerBtn = document.getElementById("powerButton");
-
-
+const powerOff = document.querySelectorAll("input:checked[type = checkbox]:checked").valeu;
+const volume = document.getElementById("volumeBtn");
 
 
 let cpuSequence = [];
@@ -32,6 +32,9 @@ function playNote(key) {
   key.classList.add("active");
   noteAudio.addEventListener("ended", () => {
     key.classList.remove("active");
+  });
+  volume.addEventListener("change", (event) => {
+    noteAudio.volume = event.currentTarget.value / 100;
   });
 }
 
@@ -65,32 +68,24 @@ function playGame() {
   startBtn.classList.add("unclickable");
 }
 
-//botao de start
-// startBtn.addEventListener("click", () => {
-//   mode = "Game";
-//   playerScore.innerHTML = "0";
-//   playGame();
-// });
-
 //botão para "ligar"o jogo.
 powerBtn.addEventListener("click", (event) => {
+  power = powerBtn.checked ? "on" : "off";
   playerScore.innerHTML = "--";
-  if (power = "on") {
+  
+  if (power === "on") {
     startBtn.addEventListener("click", () => {
       mode = "Game";
       playerScore.innerHTML = "0";
       playGame();
     });
-  }
-  if(power = "off") {
+  } else {
     mode = "free";
+    resetGame();
+    playerScore.innerHTML = "";
   }
 });
 
-powerBtn.addEventListener("dblclick", (event) => {
-  power = "off";
-   playerScore.innerHTML = "";
-});
 
 // escolha do jogador
 function handleChoise(key) {
@@ -98,7 +93,7 @@ function handleChoise(key) {
 
   // Checa sequência
   if (playerSequence[index] !== cpuSequence[index]) {
-    alert("Você perdeu");
+    alert("Game over");
     resetGame();
     return;
   } else if (playerSequence[index] == cpuSequence[index]) {
@@ -108,7 +103,6 @@ function handleChoise(key) {
   if (playerSequence.length === cpuSequence.length) {
     playerSequence = [];
 
-    // alert("Você acertou!");
     setTimeout(() => {
       nextRound();
     }, 1000);
@@ -135,11 +129,5 @@ restartBtn.addEventListener("click", () => {
   playerScore.innerHTML = "0";                
 });
 
-// TO DO:
 
-//1.score OK
-// 2. esperar o computador gerar a sequencia, para permitir o clique;
-//3.. permitir o  modo livre ("brincar"com o piano livremente)-> se tiver nesse modo, não entra no handlechoise  OK
-//4. se der tempo, adicionar opcao de usar teclas para brincar com o piano.
-//5. Não poder clicar no start enquanto tiver na partida
-//6. rever tempo de efeito do "active"
+

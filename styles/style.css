@@ -98,31 +98,61 @@ body {
   z-index: 2;
   background-color: #c9b9ff;
   border-color: #c9b9ff;
-  bottom: 7.8rem;
+  bottom: 7.9rem;
   left: 7.8rem;
 }
 
-#powerButton{
+#powerButton {
   border-radius: 1rem;
   position: absolute;
   z-index: 2;
-  bottom: 8.7rem;
-  right: 16.5rem;
+  bottom: 9rem;
+  right: 16.4rem;
+  
 }
-.powerBtn{
-  width: 3rem !important;
+input[type = "checkbox"]{
+  width: 3rem;
+  height: 1rem;
+  appearance: none;
+  background-color: rgb(26, 25, 25);;
+  cursor: pointer;
+  
+}
+/* input:checked[type = "checkbox"]{
+  background-color: #535353;
+} */
+input[type = "checkbox"]::before{
+  content: "";
+  width: 1.5rem;
+  height: 1rem;
+  background-color: #c9b9ff;
+  border-radius: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: .4s;
+}
+input:checked[type = checkbox]::before {
+  left: 1.5rem;
 }
 #volumeBtn {
   border-radius: 1rem;
+  width: 5.0rem; 
+  height: 0.5rem;
   position: absolute;
   z-index: 2;
-  bottom: 8.7rem;
+  bottom: 9.2rem;
   right: 8.5rem;
+  appearance: none;
+  background-color: rgb(26, 25, 25);
 }
-.volBtn{
-  width: 5rem !important;
+#volumeBtn::-webkit-slider-thumb{
+  appearance: none;
+  background-color: #c9b9ff;
+  width: 0.5em;
+  height: 1rem;
+  border-radius: 1rem;
 }
-
 #score {
   font-family: "DS-Digital";
   width: 5rem;
