@@ -5,7 +5,7 @@ const keys = document.querySelectorAll(".key");
 const playerScore = document.getElementById("counter");
 const powerBtn = document.getElementById("powerButton");
 const powerOff = document.querySelectorAll("input:checked[type = checkbox]:checked").valeu;
-const volume = document.getElementById("volumeBtn");
+const volumeBtn = document.getElementById("volumeBtn");
 
 
 let cpuSequence = [];
@@ -13,6 +13,7 @@ let playerSequence = [];
 let mode = "free";
 let count = 1;
 let power = "off";
+let volume = 100;
 
 keys.forEach((key) => {
   key.addEventListener("click", () => playNote(key));
@@ -33,10 +34,12 @@ function playNote(key) {
   noteAudio.addEventListener("ended", () => {
     key.classList.remove("active");
   });
-  volume.addEventListener("change", (event) => {
-    noteAudio.volume = event.currentTarget.value / 100;
-  });
+  noteAudio.volume = volume/100;
 }
+
+volumeBtn.addEventListener("change", (event) => {
+  volume = event.currentTarget.value;
+});
 
 // ajusta o tempo de cada key 
 function playRound(nextSequence) {
@@ -59,30 +62,48 @@ function nextRound() {
   nextSequence.push(pickRandomKey());
   cpuSequence = nextSequence;
   playRound(nextSequence);
+
 }
 
 //função que inicia o jogo
 function playGame() {
+
   //sorteia a key e coloca na array da cpu
   nextRound();
   startBtn.classList.add("unclickable");
 }
+
+startBtn.addEventListener("click", () => {
+  if(power === "on"){
+    mode = "Game";
+    playerScore.innerHTML = "0";
+    playGame();
+  }
+});
+
+restartBtn.addEventListener("click", () => {
+  if(power === "on"){
+    mode = "Game";
+    resetGame();
+    playerScore.innerHTML = "0";
+
+    setTimeout(() => {
+      playGame();
+    }, 1000);
+  } 
+});
 
 //botão para "ligar"o jogo.
 powerBtn.addEventListener("click", (event) => {
   power = powerBtn.checked ? "on" : "off";
   playerScore.innerHTML = "--";
   
-  if (power === "on") {
-    startBtn.addEventListener("click", () => {
-      mode = "Game";
-      playerScore.innerHTML = "0";
-      playGame();
-    });
-  } else {
+  if (power === "off") {
     mode = "free";
     resetGame();
     playerScore.innerHTML = "";
+  } else {
+    startBtn.classList.remove("unclickable");
   }
 });
 
@@ -94,7 +115,6 @@ function handleChoise(key) {
   // Checa sequência
   if (playerSequence[index] !== cpuSequence[index]) {
     alert("Game over");
-    resetGame();
     return;
   } else if (playerSequence[index] == cpuSequence[index]) {
     updatePlayerScore();
@@ -123,11 +143,7 @@ function resetGame() {
   playerScore.innerHTML = "--";
 }
 
-restartBtn.addEventListener("click", () => {
-  resetGame();
-  playGame();
-  playerScore.innerHTML = "0";                
-});
+
 
 
 
