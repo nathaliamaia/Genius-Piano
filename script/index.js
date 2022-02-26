@@ -1,10 +1,9 @@
-// Classes
+
 const startBtn = document.getElementById("btnStart");
 const restartBtn = document.getElementById("btnRestart");
 const keys = document.querySelectorAll(".key");
 const playerScore = document.getElementById("counter");
 const powerBtn = document.getElementById("powerButton");
-const powerOff = document.querySelectorAll("input:checked[type = checkbox]:checked").valeu;
 const volumeBtn = document.getElementById("volumeBtn");
 
 
@@ -25,7 +24,6 @@ keys.forEach((key) => {
   key.addEventListener("mouseout", () => key.classList.remove("active"));
 });
 
-// audio das keys
 function playNote(key) {
   const noteAudio = document.getElementById(key.dataset.note);
   noteAudio.currentTime = 0;
@@ -41,7 +39,6 @@ volumeBtn.addEventListener("change", (event) => {
   volume = event.currentTarget.value;
 });
 
-// ajusta o tempo de cada key 
 function playRound(nextSequence) {
   nextSequence.forEach((key, index) => {
     setTimeout(() => {
@@ -50,13 +47,11 @@ function playRound(nextSequence) {
   });
 }
 
-//sorteio de teclas aleatórias
 function pickRandomKey() {
   const randomNum = Math.floor(Math.random() * keys.length);
   return keys[randomNum];
 }
 
-//adiciona um novo valor no final da sequência 
 function nextRound() {
   const nextSequence = [...cpuSequence];
   nextSequence.push(pickRandomKey());
@@ -65,10 +60,7 @@ function nextRound() {
 
 }
 
-//função que inicia o jogo
 function playGame() {
-
-  //sorteia a key e coloca na array da cpu
   nextRound();
   startBtn.classList.add("unclickable");
 }
@@ -93,7 +85,6 @@ restartBtn.addEventListener("click", () => {
   } 
 });
 
-//botão para "ligar"o jogo.
 powerBtn.addEventListener("click", (event) => {
   power = powerBtn.checked ? "on" : "off";
   playerScore.innerHTML = "--";
@@ -107,12 +98,9 @@ powerBtn.addEventListener("click", (event) => {
   }
 });
 
-
-// escolha do jogador
 function handleChoise(key) {
   const index = playerSequence.push(key) - 1;
 
-  // Checa sequência
   if (playerSequence[index] !== cpuSequence[index]) {
     alert("Game over");
     return;
