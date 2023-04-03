@@ -1,6 +1,6 @@
 <h1>Genius Piano   🎹 ✨</h1>
 
-Genius Piano is a musical <b>memory game</b>🧠
+Genius Piano is a musical <b>memory game</b> 🧠💭
 
 <h2> Listen to the sounds and memorize the keys 🎶  </h2>
 The game has two modes: 
